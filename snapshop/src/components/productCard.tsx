@@ -1,18 +1,41 @@
+import { useAppDispatch } from "../serviceProvider/hook";
+import { addToCart } from "../serviceProvider/slices/cartSlice";
+import type { Product } from "../types";
+import { buttonClass } from "../theme";
+
 interface Props {
-  product: any;
+  product: Product;
 }
 
 const ProductCard = ({ product }: Props) => {
+
+  const dispatch = useAppDispatch();
+
+  const handleAddToCart = () => {
+    console.log("add to cart");
+    dispatch(
+      addToCart({
+        id: product.id,
+        title: product.title,
+        price: product.price,
+        image: product.image,
+        quantity: 1,
+      })
+    );
+  };
+
   return (
-    <div className="border p-4 rounded shadow hover:shadow-lg transition">
+    <div className="card p-4 rounded-lg transition h-full flex flex-col">
       <img
         src={product.image}
         alt={product.title}
         className="grid h-40 mx-auto mb-3 object-contain"
       />
-      <h3 className="font-semibold text-sm mb-1">{product.title}</h3>
-      <p className="text-gray-600 mb-2">${product.price}</p>
-      <button className="bg-blue-500 text-white w-full py-1 rounded hover:bg-blue-600">
+      <div className="flex-1">
+        <h3 className="font-semibold text-sm mb-1 line-clamp-2">{product.title}</h3>
+        <p className="muted mb-3">${product.price}</p>
+      </div>
+      <button onClick={handleAddToCart} className={`${buttonClass("primary")} w-full mt-auto`}>
         Add to Cart
       </button>
     </div>

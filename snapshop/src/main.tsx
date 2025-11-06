@@ -4,6 +4,8 @@ import App from "./App";
 import { Provider } from "react-redux";
 import { store } from "./serviceProvider/store";
 import "./index.css";
+import "./theme.css";
+import { getTheme, setTheme } from "./theme";
 
 ReactDOM.createRoot(document.getElementById("root")!).render(
   <React.StrictMode>
@@ -12,5 +14,6 @@ ReactDOM.createRoot(document.getElementById("root")!).render(
     </Provider>
   </React.StrictMode>
 );
+setTheme(getTheme());
 
 

@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { useAppDispatch, useAppSelector } from "../serviceProvider/hook";
 import { login } from "../serviceProvider/slices/authSlice";
+import { buttonClass } from "../theme";
 
 const Login: React.FC = () => {
   const navigate = useNavigate();
@@ -17,11 +18,20 @@ const Login: React.FC = () => {
     }
   }, [isAuthenticated, navigate]);
 
-  const handleSubmit = async (e: React.FormEvent) => {
+  const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
 
-     if (email && password) {
-      dispatch(login(email));
+    if (email && password) {
+      dispatch(
+        login({
+          user: {
+            name: email.split("@")[0],
+            email,
+          },
+          token: "fake-fakestoreapi-token-12345",
+        })
+      );
+
       navigate("/products");
     } else {
       alert("Please enter valid credentials!");
@@ -29,12 +39,9 @@ const Login: React.FC = () => {
   };
 
   return (
-    <div className="flex justify-center items-center h-screen bg-gray-100">
-      <form
-        onSubmit={handleSubmit}
-        className="bg-white shadow-md rounded px-8 pt-6 pb-8 w-96"
-      >
-        <h2 className="text-2xl font-bold mb-6 text-center">Login</h2>
+    <div className="flex justify-center items-center min-h-[80vh]">
+      <form onSubmit={handleSubmit} className="surface rounded-2xl px-8 pt-8 pb-8 w-96">
+        <h2 className="text-2xl font-bold mb-6 text-center brand">Login</h2>
 
         <input
           type="email"
@@ -43,7 +50,7 @@ const Login: React.FC = () => {
           value={email}
           onChange={(e) => setEmail(e.target.value)}
           autoComplete="username"
-          className="border w-full mb-3 p-2 rounded"
+          className="input mb-3"
           required
         />
 
@@ -54,14 +61,11 @@ const Login: React.FC = () => {
           value={password}
           onChange={(e) => setPassword(e.target.value)}
           autoComplete="current-password"
-          className="border w-full mb-3 p-2 rounded"
+          className="input mb-4"
           required
         />
 
-        <button
-          type="submit"
-          className="w-full bg-blue-500 text-white py-2 rounded hover:bg-blue-600 transition"
-        >
+        <button type="submit" className={`${buttonClass("primary")} w-full`}>
           Login
         </button>
       </form>
@@ -70,5 +74,3 @@ const Login: React.FC = () => {
 };
 
 export default Login;
-
-

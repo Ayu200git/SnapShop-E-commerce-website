@@ -1,0 +1,15 @@
+import type { Product } from "./product";
+
+export interface CartItem {
+  id: Product["id"];
+  title: Product["title"];
+  price: Product["price"];
+  image: Product["image"];
+  quantity: number;
+}
+
+export interface CartState {
+  items: CartItem[];
+}
+
+
