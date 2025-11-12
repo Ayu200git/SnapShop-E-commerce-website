@@ -11,9 +11,6 @@ import Wishlist from "./Pages/Wishlist";
 import ProductDetails from "./Pages/ProductDetails";
 import Profile from "./Pages/Profile";
 import Dashboard from "./Pages/DashBoard";
-// import Checkout from "./Pages/Checkout";
-// import OrderSuccess from "./Pages/OrderSuccess";
-// import MyOrders from "./Pages/MyOrders";
 import Register from "./Pages/Register";
 import AdminDashboard from "./Pages/AdminDashboard";
 import UserList from "./Pages/User";
@@ -45,9 +42,6 @@ function App() {
             <Route path="/user" element={<UserList/>} />
             <Route path="/manageproducts" element={<ManageProducts/>} />
             <Route path="/managecart" element={<ManageCarts/>} />
-            {/* <Route path="/checkout" element={<PrivateRoute><Checkout /></PrivateRoute>} /> */}
-            {/* <Route path="/order-success" element={<PrivateRoute><OrderSuccess /></PrivateRoute>} /> */}
-            {/* <Route path="/orders" element={<PrivateRoute><MyOrders /></PrivateRoute>} /> */}
             <Route path="/admin" element={<AdminDashboard/>} />
           </Routes>
         </Layout>  
